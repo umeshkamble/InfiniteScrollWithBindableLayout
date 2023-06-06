@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="InfiniteScrollWithBindableLayout.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Grid
+        IgnoreSafeArea="{OnPlatform Android=false, iOS=true}"
+        Padding="20"
+        RowDefinitions="Auto,*"
+        RowSpacing="20">
+        <Label FontSize="Title" Text="Infinite Scrolling" />
+        <Grid  RowDefinitions="*,Auto" Grid.Row="1">
+            <ScrollView  Scrolled="ScrollView_Scrolled">
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding DisplayStringList}" Spacing="15">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label FontSize="Body" Text="{Binding .}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+            <ActivityIndicator
+                Grid.Row="1"
+            VerticalOptions="Center"
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}"
+            Color="{StaticResource Tertiary}" />
+        </Grid>
+    </Grid>
+</ContentPage>
